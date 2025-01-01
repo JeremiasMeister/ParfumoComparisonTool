@@ -1,6 +1,6 @@
 // frontend/src/utils/api.js
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.com/api' 
+  ? 'https://parfumocomparisontool.onrender.com/api' 
   : 'http://localhost:3001/api';
 
 export const scrapeParfumoUrl = async (url) => {

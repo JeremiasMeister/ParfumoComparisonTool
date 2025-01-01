@@ -5,7 +5,12 @@ const scraperRouter = require('./routes/scraper');
 
 const app = express();
 
-app.use(cors());
+// backend/src/server.js
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://JeremiasMeister.github.io'
+    : 'http://localhost:5173'
+}));
 app.use(express.json());
 
 const rateLimiter = new RateLimiterMemory({
