@@ -5,11 +5,9 @@ const scrapeWithPuppeteer = async (url) => {
     headless: "new",
     args: [
       '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-gpu',
-      '--disable-dev-shm-usage'
+      '--disable-setuid-sandbox'
     ],
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null
+    executablePath: '/usr/bin/google-chrome'
   });
   
   try {
