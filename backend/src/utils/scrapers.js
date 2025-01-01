@@ -2,12 +2,12 @@ const puppeteer = require('puppeteer');
 
 const scrapeWithPuppeteer = async (url) => {
   const browser = await puppeteer.launch({
-    headless: "new",
     args: [
       '--no-sandbox',
-      '--disable-setuid-sandbox'
-    ],
-    executablePath: '/usr/bin/google-chrome'
+      '--disable-setuid-sandbox',
+      '--single-process',
+      '--disable-dev-shm-usage'
+    ]
   });
   
   try {
