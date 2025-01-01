@@ -3,7 +3,13 @@ const puppeteer = require('puppeteer');
 const scrapeWithPuppeteer = async (url) => {
   const browser = await puppeteer.launch({
     headless: "new",
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage'
+    ],
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null
   });
   
   try {
