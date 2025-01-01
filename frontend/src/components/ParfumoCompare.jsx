@@ -7,7 +7,7 @@ const PerfumeCard = ({ perfume, viewMode }) => {
 
   if (viewMode === 'grid') {
     return (
-      <div className="border rounded p-2 flex flex-col items-center hover:bg-gray-50 transition-colors cursor-default">
+      <div className=" text-white border border-purple-600 rounded p-2 flex flex-col items-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-900 transition-colors cursor-default">
         <div className="w-24 h-24 mb-2">
           <img 
             src={perfume.imageUrl} 
@@ -23,7 +23,7 @@ const PerfumeCard = ({ perfume, viewMode }) => {
   }
 
   return (
-    <div className="flex items-center gap-2 p-2 hover:bg-gray-50 cursor-default">
+    <div className="flex text-white items-center gap-2 p-2 hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-900 cursor-default">
       <div className="w-12 h-12 shrink-0">
         <img 
           src={perfume.imageUrl} 
@@ -42,10 +42,10 @@ const CollapsibleSection = ({ title, children, count }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="border rounded mb-4">
+    <div className="border border-purple-600 rounded mb-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-3 bg-gray-50 hover:bg-gray-100"
+        className="w-full flex text-white justify-between items-center p-3 bg-gradient-to-r from-purple-600 to-purple-900 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950"
       >
         <span className="font-bold">{title} ({count})</span>
         {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
@@ -69,7 +69,7 @@ const FilterableCollection = ({ perfumes, title, viewMode }) => {
           placeholder="Filter perfumes..."
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="w-full p-2 pr-8 border rounded"
+          className="w-full p-2 pr-8 border border-purple-600 rounded"
         />
         <Search size={18} className="absolute right-2 top-2.5 text-gray-400" />
       </div>
@@ -180,7 +180,7 @@ const ParfumoCompare = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Parfumo Collection Comparison</h1>
+      <h1 className="text-4xl text-white font-bold mb-6">Parfumo Collection Comparison</h1>
       
       <form onSubmit={handleSubmit} className="space-y-4 mb-8">
         {urls.map((url, index) => (
@@ -190,7 +190,7 @@ const ParfumoCompare = () => {
               value={url}
               onChange={(e) => handleUrlChange(index, e.target.value)}
               placeholder="Enter Parfumo.de collection URL"
-              className="flex-1 p-2 border rounded"
+              className="flex-1 p-2 border border-purple-600 rounded"
             />
           </div>
         ))}
@@ -198,7 +198,7 @@ const ParfumoCompare = () => {
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
+          className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-900 text-white rounded hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950 disabled:bg-gray-400"
         >
           {loading ? 'Loading...' : 'Compare Collections'}
         </button>
@@ -215,14 +215,14 @@ const ParfumoCompare = () => {
           <div className="flex justify-end items-center mb-6 gap-2">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded ${viewMode === 'grid' ? 'bg-gray-200' : ''}`}
+              className={`p-2 rounded text-white ${viewMode === 'grid' ? 'bg-gradient-to-r from-purple-600 to-purple-900 rounded hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950 disabled:bg-gray-400' : ''}`}
               title="Grid view"
             >
               <Grid size={20} />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded ${viewMode === 'list' ? 'bg-gray-200' : ''}`}
+              className={`p-2 rounded text-white ${viewMode === 'list' ? 'bg-gradient-to-r from-purple-600 to-purple-900 rounded hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950 disabled:bg-gray-400' : ''}`}
               title="List view"
             >
               <List size={20} />
