@@ -8,7 +8,7 @@ const app = express();
 // backend/src/server.js
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? 'https://JeremiasMeister.github.io'
+    ? 'https://jeremiasmeister.github.io'
     : 'http://localhost:5173'
 }));
 app.use(express.json());
