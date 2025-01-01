@@ -1,4 +1,7 @@
-const API_URL = 'http://localhost:3001/api';
+// frontend/src/utils/api.js
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://your-backend-url.com/api' 
+  : 'http://localhost:3001/api';
 
 export const scrapeParfumoUrl = async (url) => {
   try {
