@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        fill: {
+          '0%': { transform: 'scaleY(0)' },
+          '100%': { transform: 'scaleY(1)' }
+        }
+      },
+      animation: {
+        'fill': 'fill 2s infinite alternate'
+      }
+    }
   },
   plugins: [],
 }

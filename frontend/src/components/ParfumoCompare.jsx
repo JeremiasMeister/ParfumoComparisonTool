@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { scrapeParfumoUrl } from '../utils/api';
-import { List, Grid, ChevronDown, ChevronUp, Search } from 'lucide-react';
+import { List, Grid } from 'lucide-react';
+import LoadingAnimation from "./LoadingAnimation";
 
 const PerfumeCard = ({ perfume, viewMode }) => {
   const displayName = perfume.name.replace(/-/g, ' ');
 
   if (viewMode === 'grid') {
     return (
-      <div className=" text-white border border-purple-600 rounded p-2 flex flex-col items-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-900 transition-colors cursor-default">
+      <div className="text-white border border-purple-600 rounded p-2 flex flex-col items-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-900 transition-colors cursor-default">
         <div className="w-24 h-24 mb-2">
           <img 
             src={perfume.imageUrl} 
@@ -48,7 +49,7 @@ const CollapsibleSection = ({ title, children, count }) => {
         className="w-full flex text-white justify-between items-center p-3 bg-gradient-to-r from-purple-600 to-purple-900 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950"
       >
         <span className="font-bold">{title} ({count})</span>
-        {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        {isOpen ? '▼' : '▶'}
       </button>
       {isOpen && <div className="p-3">{children}</div>}
     </div>
@@ -63,15 +64,14 @@ const FilterableCollection = ({ perfumes, title, viewMode }) => {
 
   return (
     <CollapsibleSection title={title} count={filteredPerfumes.length}>
-      <div className="mb-3 relative">
+      <div className="mb-3">
         <input
           type="text"
           placeholder="Filter perfumes..."
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="w-full p-2 pr-8 border border-purple-600 rounded"
+          className="w-full p-2 border border-purple-600 rounded"
         />
-        <Search size={18} className="absolute right-2 top-2.5 text-gray-400" />
       </div>
       <div className={viewMode === 'grid' 
         ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
@@ -195,13 +195,16 @@ const ParfumoCompare = () => {
           </div>
         ))}
         
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-900 text-white rounded hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950 disabled:bg-gray-400"
-        >
-          {loading ? 'Loading...' : 'Compare Collections'}
-        </button>
+        {loading ? (
+          <LoadingAnimation text="Comparing Collections..." />
+        ) : (
+          <button
+            type="submit"
+            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-900 text-white rounded hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-950"
+          >
+            Compare Collections
+          </button>
+        )}
       </form>
 
       {error && (
