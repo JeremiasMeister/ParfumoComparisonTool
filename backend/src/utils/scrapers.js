@@ -1,26 +1,8 @@
-const puppeteer = require('puppeteer-core');
-
-const getChromePath = () => {
-  // Check if we're in production (Render.com)
-  if (process.env.NODE_ENV === 'production') {
-    return '/usr/bin/chromium';
-  }
-  
-  // Paths for local development by OS
-  switch (process.platform) {
-    case 'win32':
-      return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-    case 'darwin':
-      return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-    default:
-      return '/usr/bin/google-chrome';
-  }
-};
+const puppeteer = require('puppeteer');
 
 const scrapeWithPuppeteer = async (url) => {
   const browser = await puppeteer.launch({
     headless: "new",
-    executablePath: getChromePath(),
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
