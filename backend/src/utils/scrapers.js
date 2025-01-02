@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const timeout = 60000;
 
 const scrapeWithPuppeteer = async (url) => {
   const browser = await puppeteer.launch({
@@ -17,13 +18,18 @@ const scrapeWithPuppeteer = async (url) => {
     await page.setViewport({ width: 1280, height: 800 });
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36');
 
+    // Set a longer default navigation timeout (e.g., 60 seconds)
+    page.setDefaultNavigationTimeout(timeout);
+
+    // Additional timeouts and options for page.goto
     await page.goto(url, { 
-      waitUntil: 'networkidle0',
-      timeout: 30000 
+      waitUntil: ['networkidle0', 'domcontentloaded'],
+      timeout: timeout 
     });
 
+
     // Wait specifically for the content wrapper
-    await page.waitForSelector('#wr_content_wrapper', { timeout: 30000 });
+    await page.waitForSelector('#wr_content_wrapper', { timeout: timeout });
     
     if (url.includes('/Benutzer/') && url.includes('/Sammlung/') || url.includes('/Users/') && url.includes('Collection')) {
       const collectionData = await page.evaluate(() => {
